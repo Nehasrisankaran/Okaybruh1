@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Okaybruh</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Okaybruh</h1>
+                <p>Premium Merchandise</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html" class="active">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="cart-section">
+            <div class="container">
+                <h2>Your Cart</h2>
+                <div id="cart-items" class="cart-items">
+                    <!-- Cart items will be loaded here -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (10%):</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                        <button id="checkout-btn" class="btn-primary">Checkout</button>
+                        <button id="clear-cart-btn" class="btn-secondary">Clear Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Modal -->
+        <div id="checkout-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Checkout</h2>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="customer-name">Name:</label>
+                        <input type="text" id="customer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-email">Email:</label>
+                        <input type="email" id="customer-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-phone">Phone:</label>
+                        <input type="tel" id="customer-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Method:</label>
+                        <select id="payment-method">
+                            <option value="qrcode">PayNow (QR Code)</option>
+                            <option value="cash">Cash on Delivery</option>
+                        </select>
+                    </div>
+                    <div id="qrcode-container" style="display: none;">
+                        <h3>Scan to Pay</h3>
+                        <div id="qrcode-display"></div>
+                    </div>
+                    <button type="submit" class="btn-primary">Place Order</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bill Print Modal -->
+        <div id="bill-modal" class="modal">
+            <div class="modal-content printable">
+                <div class="bill-header">
+                    <h2>Okaybruh</h2>
+                    <p>Merchandise Store</p>
+                    <p>Order #<span id="bill-order-id"></span></p>
+                    <p>Date: <span id="bill-date"></span></p>
+                </div>
+                <div class="bill-customer">
+                    <p><strong>Customer:</strong> <span id="bill-customer-name"></span></p>
+                    <p><strong>Email:</strong> <span id="bill-customer-email"></span></p>
+                    <p><strong>Phone:</strong> <span id="bill-customer-phone"></span></p>
+                    <p><strong>Payment Method:</strong> <span id="bill-payment-method"></span></p>
+                </div>
+                <div id="bill-qrcode-container" style="display: none; text-align: center; margin: 1rem 0;">
+                    <!-- QR code will be displayed here if payment method is QR code -->
+                </div>
+                <div class="bill-items">
+                    <table id="bill-items-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="bill-total">
+                    <p>Subtotal: $<span id="bill-subtotal"></span></p>
+                    <p>Tax: $<span id="bill-tax"></span></p>
+                    <p><strong>Total: $<span id="bill-total"></span></strong></p>
+                </div>
+                <div class="bill-actions">
+                    <button onclick="window.print()" class="btn-primary">Print Bill</button>
+                    <button onclick="closeBillModal()" class="btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Okaybruh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
+
